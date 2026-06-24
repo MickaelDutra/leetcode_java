@@ -1,19 +1,44 @@
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 class Solution {
     public List<Integer> findDisappearedNumbers(int[] nums) {
-        List<Integer> result = new java.util.ArrayList<>(List.of());
-        int [] arraySorted = Arrays.stream(nums).sorted().toArray();
-        System.out.println("array sorted: " + Arrays.toString(arraySorted));
+//        HashSet<Integer> count = new HashSet<>();
+//        List<Integer> result = new ArrayList<>();
+//
+//        for (int num : nums) {
+//            count.add(num);
+//        }
+//
+//        for (int i = 1; i <= nums.length; i++){
+//            if(!count.contains(i)){
+//                result.add(i);
+//            }
+//        }
+//
+//
+//        System.out.println(Arrays.toString(result.toArray()));
+//        return result;
 
-        for (int i = 0; i < arraySorted.length; i++){
-            int validation = arraySorted.length != arraySorted[i] ? arraySorted[i + 1] : arraySorted[i];
-            if (i == validation){
-                result.add(arraySorted[i+1]);
+//
+//      Tempo     O(n)
+//      Espaço extra O(1)
+        List<Integer> result = new ArrayList<>();
+
+
+        for (int i = 0; i < nums.length; i++) {
+            int index = Math.abs(nums[i]) - 1;
+
+            if (nums[index] > 0) {
+                nums[index] = -nums[index];
             }
         }
-        System.out.println("array result: " + result);
-        return null;
+
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > 0) {
+                result.add(i + 1);
+            }
+        }
+        System.out.println(Arrays.toString(result.toArray()));
+        return result;
     }
 }
